@@ -12,6 +12,10 @@ const config = {
 };
 const client = new Client(config);
 
+app.get('/api/user', (req, res) => {
+    res.json({ message: 'Hello from Backend!', userId: '1234567890' });
+});
+
 app.post('/webhook', middleware(config), (req, res) => {
     Promise.all(req.body.events.map(handleEvent))
         .then(() => res.sendStatus(200))
