@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const config = require('../config/line');
 const { handleEvent } = require('../services/handle-event');
+const { middleware } = require('@line/bot-sdk');
 
 // http://localhost:4000/line/webhook
 router.post('webhook', middleware(config), (req, res) => {
