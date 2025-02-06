@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { Client, middleware } = require('@line/bot-sdk');
+const { handleEvent } = require('./services/handle-event');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -21,13 +22,6 @@ app.post('/webhook', middleware(config), (req, res) => {
         .then(() => res.sendStatus(200))
         .catch(err => console.error(err));
 });
-
-async function handleEvent(event) {
-    if (event.type === 'message' && event.message.type === 'text') {
-        return client.replyMessage(event.replyToken, { type: 'text', text: `คุณพิมพ์ว่า: ${event.message.text}` });
-    }
-    return Promise.resolve(null);
-}
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
