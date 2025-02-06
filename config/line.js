@@ -1,16 +1,14 @@
 const line = require('@line/bot-sdk');
+const { Client, middleware } = require('@line/bot-sdk');
 
-// create LINE SDK config from env variables
-const lineConfig = {
-  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-  channelSecret: process.env.CHANNEL_SECRET,
+const config = {
+    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
+    channelSecret: process.env.CHANNEL_SECRET
 };
-
-// create LINE SDK client
-const client = new line.Client(lineConfig);
+const client = new Client(config);
 
 module.exports = {
-    line,
-    lineConfig,
-    client
+  line,
+  lineConfig,
+  client
 }
