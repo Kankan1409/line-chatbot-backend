@@ -4,6 +4,7 @@ const config = require('../config/line');
 const service = require('../services/handle-event');
 
 // http://localhost:4000/line/callback
+// mfldjfljdlfjdlf
 router.post('callback', config.line.middleware(config.lineConfig) ,function(req, res, next) {
   Promise
   .all(req.body.events.map(service.handleEvent))
