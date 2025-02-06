@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const { Client, middleware } = require('@line/bot-sdk');
 const indexRouter = require('./routes/index');
+const { handleEvent } = require('./services/handle-event');
 
 const app = express();
 const port = process.env.PORT || 4000;
