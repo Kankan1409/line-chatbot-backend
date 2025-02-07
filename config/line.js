@@ -1,26 +1,24 @@
-// const line = require('@line/bot-sdk');
-// const { Client, middleware } = require('@line/bot-sdk');
-// require('dotenv').config();
+require('dotenv').config({ path: '../.env' }); // โหลดค่าจาก .env
 
+const line = require('@line/bot-sdk');
 
-// const config = {
-//     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-//     channelSecret: process.env.CHANNEL_SECRET
-// };
-// const Client = new Client(config);
+const config = {
+    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
+    channelSecret: process.env.CHANNEL_SECRET
+};
 
-// module.exports = {
-//   Client,
-//   config,
-//   line
-// }
-// const { Client } = require('@line/bot-sdk'); // ✅ นำเข้า Client อย่างถูกต้อง
+// ตรวจสอบว่าโหลดค่า .env ถูกต้องหรือไม่
+if (!config.channelSecret) {
+    throw new Error("CHANNEL_SECRET is missing. Check your .env file.");
+}
+if (!config.channelAccessToken) {
+    throw new Error("CHANNEL_ACCESS_TOKEN is missing. Check your .env file.");
+}
 
-// const config = {
-//   channelSecret: process.env.LINE_CHANNEL_SECRET,
-//   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN
-// };
+const client = new line.Client(config);
 
-// const client = new Client(config); // ✅ เปลี่ยนชื่อตัวแปรจาก Client → client
-
-// module.exports = { client, middleware: middleware(config) };
+module.exports = {
+    config,
+    line,
+    client
+};
