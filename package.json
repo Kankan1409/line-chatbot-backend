@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon ./bin/www",
     "start": "node app.js",
-    "ngrok":"ngrok http --domain=nice-becoming-drake.ngrok-free.app 5000"
+    "ngrok": "ngrok http --domain=nice-becoming-drake.ngrok-free.app 5000"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mssql": "^11.0.1"
   }
 }

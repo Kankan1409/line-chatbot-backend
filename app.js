@@ -14,4 +14,23 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+////////////////////////////////////////////////////
+const { connectToDatabase, sql } = require('./config/db');
+
+async function main() {
+  try {
+    const pool = await connectToDatabase();
+
+    // ทดสอบ Query
+    const result = await pool.request()
+      .query('SELECT TOP 10 * FROM ssg_user'); // ระบุชื่อ Table ของคุณ
+    console.log(result.recordset);
+
+    pool.close(); // ปิดการเชื่อมต่อ
+  } catch (err) {
+    console.error('Error running query:', err);
+  }
+}
+main();
+
 module.exports = app;
