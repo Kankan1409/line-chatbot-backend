@@ -1,4 +1,5 @@
 require('dotenv').config({ path: '../.env' }); // โหลดค่าจาก .env
+const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
 
 const line = require('@line/bot-sdk');
 
