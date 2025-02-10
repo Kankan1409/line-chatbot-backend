@@ -1,5 +1,4 @@
-require('dotenv').config({ path: '../.env' }); // โหลดค่าจาก .env
-const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
+require('dotenv').config(); // ✅ โหลดค่า .env
 
 const line = require('@line/bot-sdk');
 
@@ -8,12 +7,12 @@ const config = {
     channelSecret: process.env.CHANNEL_SECRET
 };
 
-// ตรวจสอบว่าโหลดค่า .env ถูกต้องหรือไม่
-if (!config.channelSecret) {
-    throw new Error("CHANNEL_SECRET is missing. Check your .env file.");
-}
-if (!config.channelAccessToken) {
-    throw new Error("CHANNEL_ACCESS_TOKEN is missing. Check your .env file.");
+console.log("🔍 Checking Environment Variables:");
+console.log("✅ CHANNEL_ACCESS_TOKEN:", process.env.CHANNEL_ACCESS_TOKEN ? "Loaded" : "❌ MISSING");
+console.log("✅ CHANNEL_SECRET:", process.env.CHANNEL_SECRET ? "Loaded" : "❌ MISSING");
+
+if (!config.channelSecret || !config.channelAccessToken) {
+    throw new Error("❌ ค่า CHANNEL_ACCESS_TOKEN หรือ CHANNEL_SECRET หายไปจาก .env หรือไม่ได้โหลด");
 }
 
 const client = new line.Client(config);
