@@ -2,8 +2,8 @@ const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || "ssg_linebot",
-  process.env.DB_USER || "ssg",
-  process.env.DB_PASSWORD || "1234",
+  process.env.DB_USER || "Ben",
+  process.env.DB_PASSWORD || "26457",
   {
     host: process.env.DB_HOST || "localhost",
     dialect: "mssql",
