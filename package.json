@@ -7,7 +7,8 @@
     "start": "node services/app.js",
     "ngrok": "ngrok http --domain=nice-becoming-drake.ngrok-free.app 5000",
     "db_migration": "npx sequelize migration:generate --name create-products",
-    "migration": "npx sequelize db:migrate"
+    "migration": "npx sequelize db:migrate",
+    "db_undo":"npx sequelize db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",

@@ -1,7 +1,10 @@
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
+const typeDefs = require("./typeDefs"); // ✅ โหลด schema อัตโนมัติ
+const { mutationResolvers } = require("./resolvers/mutationResolvers");
+const { queryResolvers } = require("./resolvers/queryResolvers");
 
-module.exports = {
-  typeDefs,
-  resolvers,
+const resolvers = {
+    Query: queryResolvers,
+    Mutation: mutationResolvers,
 };
+
+module.exports = { typeDefs, resolvers };

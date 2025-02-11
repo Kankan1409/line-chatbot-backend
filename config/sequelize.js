@@ -1,5 +1,4 @@
 const { Sequelize } = require("sequelize");
-require("dotenv").config();
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || "ssg_linebot",
@@ -9,23 +8,28 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST || "localhost",
     dialect: "mssql",
     port: process.env.DB_PORT || 1433,
-    logging: false, // ❌ ปิด log SQL 
+    timezone: "+07:00", // ✅ ตั้งค่า Timezone เป็นไทย (UTC+7)
+    logging: false, // ❌ ปิด log SQL
+    dialectOptions: {
+      encrypt: true,
+      trustServerCertificate: process.env.DB_TRUST_CERT === "true",
+      options: {
+        useUTC: false, // ✅ ปิด UTC mode
+        dateFirst: 1, // ✅ ใช้รูปแบบวันที่ของไทย
+      },
+    },
     pool: {
       max: 5,
       min: 0,
       acquire: 30000,
       idle: 10000,
     },
-    dialectOptions: {
-      encrypt: true,
-      trustServerCertificate: process.env.DB_TRUST_CERT === "true",
-    },
   }
 );
 
-// ✅ ทดสอบการเชื่อมต่อ
 sequelize.authenticate()
   .then(() => console.log("✅ Connected to SQL Server using Sequelize"))
   .catch((err) => console.error("❌ Database connection failed:", err));
 
-module.exports = sequelize; // ✅ Export sequelize
+module.exports = sequelize;
+
