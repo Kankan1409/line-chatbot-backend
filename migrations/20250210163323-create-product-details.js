@@ -27,12 +27,14 @@ module.exports = {
       },
       created_at: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW, 
+        allowNull: false,
+        defaultValue: Sequelize.literal("GETDATE()"), 
       },
       updated_at: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW, 
-      }
+        allowNull: false,
+        defaultValue: Sequelize.literal("GETDATE()"),
+      },
     });
   },
   async down(queryInterface, Sequelize) {
