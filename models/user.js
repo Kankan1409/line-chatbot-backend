@@ -1,45 +1,44 @@
-module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define(
-      "User",
-      {
-        id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-        },
-        user_id: {
-          type: DataTypes.STRING,
-          unique: true,
-          allowNull: false,
-        },
-        display_name: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        picture_url: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        is_active: {
-          type: DataTypes.BOOLEAN,
-          defaultValue: true,
-        },
-        created_at: {
-          type: DataTypes.DATE,
-          defaultValue: DataTypes.NOW,
-        },
-        updated_at: {
-          type: DataTypes.DATE,
-          defaultValue: DataTypes.NOW,
-        },
-      },
-      {
-        timestamps: true,
-        underscored: true,
-        tableName: "users",
-      }
-    );
-  
-    return User;
-  };
-  
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/sequelize"); // ✅ ใช้ Sequelize ที่ถูกต้อง
+
+class User extends Model {}
+
+User.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    user_id: {
+      type: DataTypes.STRING(250),
+      allowNull: false,
+      unique: true,
+    },
+    display_name: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    picture_url: {
+      type: DataTypes.STRING(1000),
+      allowNull: true,
+    },
+    is_active: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
+  },
+  {
+    sequelize, // ✅ ตรวจสอบว่าถูกส่งเข้ามาจริง
+    modelName: "User",
+    tableName: "users",
+    timestamps: true,
+    underscored: true,
+  }
+);
+
+// ✅ Debug ค่า Sequelize ว่ามันถูกส่งเข้ามาจริงไหม
+console.log("🔍 Sequelize in User.js:", sequelize);
+console.log("✅ User Model Initialized:", User);
+
+module.exports = User; // ✅ Export Model อย่างถูกต้อง
