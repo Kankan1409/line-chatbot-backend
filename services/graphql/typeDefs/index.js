@@ -1,4 +1,5 @@
 const userTypeDefs = require("./user");
+const memberTypeDefs = require("./member");
 
 const baseTypeDefs = `
     type Query
@@ -8,4 +9,5 @@ const baseTypeDefs = `
 module.exports = [
     baseTypeDefs, 
     userTypeDefs, 
+    memberTypeDefs,
 ];

@@ -1,0 +1,27 @@
+{
+    "development": {
+      "username": "Ben",
+      "password": "26457",
+      "database": "ssg_linebot",
+      "host": "localhost",
+      "dialect": "mssql",
+      "port": 1433
+    },
+    "test": {
+      "username": "Ben",
+      "password": "26457",
+      "database": "ssg_linebot",
+      "host": "localhost",
+      "dialect": "mssql",
+      "port": 1433
+    },
+    "production": {
+      "username": "ssg",
+      "password": "1234",
+      "database": "ssg_linebot",
+      "host": "localhost",
+      "dialect": "mssql",
+      "port": 1433
+    }
+  }
+  
