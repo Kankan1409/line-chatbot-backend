@@ -36,8 +36,4 @@ Member.init(
     underscored: true,
   }
 );
-
-console.log("🔍 Sequelize in User.js:", sequelize);
-console.log("✅ User Model Initialized:", Member);
-
 module.exports = Member; 

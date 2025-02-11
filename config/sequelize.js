@@ -28,7 +28,7 @@ const sequelize = new Sequelize(
 );
 
 sequelize.authenticate()
-  .then(() => console.log("✅ Connected to SQL Server using Sequelize"))
+  // .then(() => console.log("✅ Connected to SQL Server using Sequelize"))
   .catch((err) => console.error("❌ Database connection failed:", err));
 
 module.exports = sequelize;

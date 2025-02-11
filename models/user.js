@@ -37,8 +37,4 @@ User.init(
   }
 );
 
-// ✅ Debug ค่า Sequelize ว่ามันถูกส่งเข้ามาจริงไหม
-console.log("🔍 Sequelize in User.js:", sequelize);
-console.log("✅ User Model Initialized:", User);
-
 module.exports = User; // ✅ Export Model อย่างถูกต้อง

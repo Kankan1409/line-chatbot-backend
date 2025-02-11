@@ -14,8 +14,6 @@ app.use(express.static(path.join(__dirname, '../assets')));
 // ฟังก์ชันเริ่มต้นเซิร์ฟเวอร์
 async function startServer() {
   await db.sequelize.authenticate(); // ✅ ตรวจสอบการเชื่อมต่อฐานข้อมูล
-  console.log("✅ Database Connected Successfully");
-
   const server = new ApolloServer({
       typeDefs,
       resolvers,

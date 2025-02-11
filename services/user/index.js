@@ -8,13 +8,8 @@ exports.getUserProfile = async (userId) => {
     const headers = {
       "Authorization": `Bearer ${config.config.channelAccessToken}`,
       "Content-Type": "application/json",
-    };
-
-    console.log("📤 Sending request to LINE API:", url);
-    console.log("🔑 Using Access Token:", config.config.channelAccessToken);
-
+    }
     const response = await axios.get(url, { headers });
-    console.log("✅ User profile received:", response.data);
     return response.data; // ✅ คืนค่าโปรไฟล์ผู้ใช้
   } catch (error) {
     console.error("❌ Error getting user profile:", error.response?.data || error);
