@@ -28,7 +28,6 @@ exports.handleFollow = async (event) => {
 
     // Commit Transaction
     await transaction.commit();
-    console.log(`✅ User ${profile.userId} ${created ? "created" : "already exists"}`);
   } catch (error) {
     // Rollback หากเกิดปัญหา
     await transaction.rollback();

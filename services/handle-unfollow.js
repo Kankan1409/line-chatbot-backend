@@ -9,8 +9,6 @@ exports.handleUnfollow = async (event) => {
       { is_active: 0 }, // ตั้งค่าเป็นไม่ Active
       { where: { user_id: userId } }
     );
-
-    console.log(`✅ User ${userId} is now inactive.`);
   } catch (err) {
     console.error("❌ Error handling unfollow event:", err);
   }

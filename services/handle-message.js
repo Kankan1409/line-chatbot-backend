@@ -3,8 +3,6 @@ const config = require("../config/line");
 
 exports.handleMessage = async (event) => {
     try {
-        console.log("📩 ได้รับข้อความ:", event.message.text);
-
         let messages = [];
 
         // 🟢 ถ้าผู้ใช้พิมพ์ "ช่องทางการชำระเงิน"
@@ -27,7 +25,6 @@ exports.handleMessage = async (event) => {
         // ✅ ส่งข้อความกลับไปที่ LINE
         await replyMessage(event.replyToken, messages);
 
-        console.log("✅ ส่งข้อความสำเร็จ");
     } catch (error) {
         console.error("❌ ส่งข้อความไม่สำเร็จ:", error);
     }
@@ -48,7 +45,6 @@ async function replyMessage(replyToken, messages) {
 
     try {
         await axios.post(url, body, { headers });
-        console.log("✅ ส่งข้อความสำเร็จ!");
     } catch (error) {
         console.error("❌ ส่งข้อความไม่สำเร็จ:", error.response ? error.response.data : error);
     }
