@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { handleEvent } = require('../services/handle-event');
+const frontendRoutes = require('./frontend');
 require('dotenv').config();
 const path = require('path');
 
@@ -17,5 +18,6 @@ router.post('/webhook', async (req, res) => {
   }
   res.status(200).end();
 });
+router.use(frontendRoutes);
 
 module.exports = router;

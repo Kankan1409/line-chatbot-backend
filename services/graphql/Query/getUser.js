@@ -1,6 +1,15 @@
 const { User } = require("../../../models");
 
-const getUser = async (parent, { id }, context, info) => {
+const getUsers = async () => {
+  try {
+    return await User.findAll();
+  } catch (error) {
+    console.error("❌ Error fetching users:", error);
+    throw new Error(`Failed to get users: ${error.message}`);
+  }
+};
+
+const getUserById  = async (parent, { id }, context, info) => {
   try {
     const userId = parseInt(id, 10); // ✅ แปลง `id` เป็น Integer
     const user = await User.findOne({ where: { id: userId } });
@@ -15,4 +24,4 @@ const getUser = async (parent, { id }, context, info) => {
   }
 };
 
-module.exports = { getUser };
+module.exports = { getUsers, getUserById };
