@@ -11,7 +11,8 @@ const memberTypeDefs = gql`
     }
 
     extend type Query {
-        getMember(id: ID!): Member
+        getMember: [Member]
+        getMemberById(id: ID!): Member
     }
 
     extend type Mutation {
