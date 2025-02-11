@@ -10,9 +10,14 @@ const memberTypeDefs = gql`
         name_introduc: String
     }
 
+    extend type Query {
+        getMember(id: ID!): Member
+    }
 
     extend type Mutation {
         createMember(name: String!, lastname: String!, sex: String, phone: String!, name_introduc: String): Member
+        updateMember(id: ID!, name: String, lastname: String, sex: String, phone: String, name_introduc: String): Member
+        deleteMember (id: ID!): String
     }
 `;
 
