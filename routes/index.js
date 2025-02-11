@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { line, config, client } = require('../config/line');
 const { handleEvent } = require('../services/handle-event');
 require('dotenv').config();
 const path = require('path');

@@ -1,15 +1,15 @@
-const User = require("../models/user"); // Import Model User
-
-exports.handleUnfollow = async (event) => {
+const { User } = require("../models");
+async function handleUnfollow(userId) {
   try {
-    const userId = event.source.userId; // ดึง userId จาก Event
+      await User.update(
+          { is_active: 0 },
+          { where: { user_id: userId } }
+      );
 
-    // อัพเดตสถานะผู้ใช้ในฐานข้อมูล
-    await User.update(
-      { is_active: 0 }, // ตั้งค่าเป็นไม่ Active
-      { where: { user_id: userId } }
-    );
-  } catch (err) {
-    console.error("❌ Error handling unfollow event:", err);
+      console.log(`❌ User ${userId} blocked the bot`);
+  } catch (error) {
+      console.error("❌ Error updating block status:", error);
   }
-};
+}
+
+module.exports = { handleUnfollow };

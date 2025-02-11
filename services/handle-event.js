@@ -1,6 +1,7 @@
+const { handleFollow } = require("./handle-follow");
+const { handleUnfollow } = require("./handle-unfollow");
 const { handleMessage } = require("./handle-message");
-// const { handleFollow } = require("./handle-follow");
-// const { handleUnfollow } = require("./handle-unfollow");
+const { getUserProfile } = require("../config/lineService"); // ✅ นำเข้า `getUserProfile()`
 
 // event handler
 exports.handleEvent = async (event) => {
@@ -12,13 +13,24 @@ exports.handleEvent = async (event) => {
           break;
       }
       break;
-      // case "follow":
-      //   await handleFollow(event); // เมื่อเพิ่มเพื่อน
-      //   break;
-      // case "unfollow":
-      //   await handleUnfollow(event); // เมื่อเลิกเป็นเพื่อน
-      //   break;
-      //   default:
-      // console.log(`❓ Unknown event type: ${event.type}`);
+      
+    case "follow":
+      const userId = event.source.userId;
+      try {
+        const profile = await getUserProfile(userId);
+        if (profile) {
+          await handleFollow(userId, profile.displayName, profile.pictureUrl);
+        }
+      } catch (error) {
+        console.error("❌ Error fetching user profile:", error);
+      }
+      break;
+      
+    case "unfollow":
+      await handleUnfollow(event.source.userId);
+      break;
+      
+    default:
+      console.log("🔹 Event not handled:", event.type);
   }
 };
