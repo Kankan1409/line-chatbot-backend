@@ -4,6 +4,8 @@ const { getMember, getMemberById } = require("../services/graphql/Query/getMembe
 
 const router = express.Router();
 
+/*-------------------------------------User------------------------------------- */
+
 // 📌 ดึงรายชื่อผู้ใช้ทั้งหมด
 router.get("/api/users", async (req, res) => {
   try {
@@ -29,6 +31,8 @@ router.get("/api/users/:id", async (req, res) => {
   }
 });
 
+/*-------------------------------------Member------------------------------------- */
+
 // 📌 ดึงรายชื่อสมาชิกทั้งหมด
 router.get("/api/members", async (req, res) => {
   try {
@@ -50,6 +54,32 @@ router.get("/api/members/:id", async (req, res) => {
     res.json(member);
   } catch (error) {
     console.error("❌ Error fetching member:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/*-------------------------------------Product------------------------------------- */
+// 📌 ดึงข้อมูลสินค้าทั้งหมด
+router.get("/api/products", async (req, res) => {
+  try {
+    const products = await getProduct();
+    res.json(products);
+  } catch (error) {
+    console.error("❌ Error fetching products:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// 📌 ดึงข้อมูลสินค้าตาม ID
+router.get("/api/products/:id", async (req, res) => {
+  try {
+    const product = await getProductById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.json(product);  
+  } catch (error) {
+    console.error("❌ Error fetching product:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
