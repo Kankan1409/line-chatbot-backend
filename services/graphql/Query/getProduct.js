@@ -1,8 +1,13 @@
 const { Product } = require("../../../models");
 
-const getProduct = async () => {
+const getProduct = async (parent, { offset = 0, pageSize = 10 }, context, info) => {
   try {
-    return await Product.findAll();
+    const products = await Product.findAll({
+      offset: offset,
+      limit: pageSize,
+    });
+
+    return products;
   } catch (error) {
     console.error("❌ Error fetching Product:", error);
     throw new Error(`Failed to get Product: ${error.message}`);
