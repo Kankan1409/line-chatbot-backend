@@ -1,8 +1,12 @@
 const ProductTypes = require("../../../models/productTypes");
 
-const getProductTypes = async () => {
+const getProductTypes = async (parent, { offset = 0, pageSize = 10 }, context, info) => {
   try {
-    return await ProductTypes.findAll();
+    const productTypes = await ProductTypes.findAll({
+      offset: offset,
+      limit: pageSize,
+    });
+    return productTypes;
   } catch (error) {
     console.error("❌ Error fetching users:", error);
     throw new Error(`Failed to get users: ${error.message}`);

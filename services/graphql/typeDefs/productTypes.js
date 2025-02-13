@@ -12,7 +12,7 @@ const productTypesTypeDefs = gql`
     }
 
     extend type Query {
-        getProductTypes: [productTypes]
+        getProductTypes(offset: Int, pageSize: Int): [productTypes]
         getProductTypesById(id: ID!): productTypes
     }
     extend type Mutation {
