@@ -37,4 +37,14 @@ if (!db.Prod_Det) {
 } else {
   console.log("✅ models.Prod_Det โหลดสำเร็จ");
 }
+if (!db.ProductCategories) {
+  console.error("❌ models.ProductCategories ไม่ถูกโหลด");
+} else {
+  console.log("✅ models.ProductCategories โหลดสำเร็จ");
+}
+if (!db.ProductTypes) {
+  console.error("❌ models.ProductTypes ไม่ถูกโหลด");
+} else {
+  console.log("✅ models.ProductTypes โหลดสำเร็จ");
+}
 module.exports = db;

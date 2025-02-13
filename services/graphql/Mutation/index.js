@@ -10,6 +10,8 @@ const updateProduct = require("./Product/updateProduct");
 const deleteProduct = require("./Product/deleteProduct");
 const productTypes = require("./ProductTypes");
 const productDetails = require("./ProductDetails");
+const productCategories = require("./ProductCategories");
+const addUser = require("./User/addUser");
 
 // ✅ รวม resolver ทั้งหมดเข้าด้วยกัน
 Object.assign(mutationResolvers, 
@@ -19,8 +21,9 @@ Object.assign(mutationResolvers,
   createProduct, 
   updateProduct, 
   deleteProduct,
+  addUser,
   ...Object.values(productTypes),
-  ...Object.values(productDetails)
+  ...Object.values(productDetails),
+  ...Object.values(productCategories),
 );
-console.log("✅ mutation Resolvers Loaded:", mutationResolvers);
 module.exports = mutationResolvers;

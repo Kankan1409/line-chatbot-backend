@@ -52,9 +52,13 @@ class Product extends Model {
   static associate(models) {
     if (models.Prod_Det) {
         this.hasMany(models.Prod_Det, { foreignKey: "product_id", as: "productDetails" });
-    } else {
+  } if (models.ProductTypes) {
+      this.hasMany(models.ProductTypes, { foreignKey: "product_id", as: "productTypes" });
+  } if (models.ProductCategories) {
+    this.belongsTo(models.ProductCategories, { foreignKey: "category_id", as: "categories" });  // ✅ ต้องใช้ `as: "categories"`
+  } else {
         console.error("❌ models.Prod_Det ไม่ถูกโหลด");
-    }
+  }
 }
 }
 

@@ -1,10 +1,17 @@
-const ProductTypes = require("../../../models/productTypes");
+const {ProductTypes , Product} = require("../../../models");
 
 const getProductTypes = async (parent, { offset = 0, pageSize = 10 }, context, info) => {
   try {
     const productTypes = await ProductTypes.findAll({
       offset: offset,
       limit: pageSize,
+      include: [
+        {
+          model: Product,
+          as: "product", // ✅ เพิ่ม as ให้ตรงกับ belongsTo
+          attributes: ["id", "products_name", "price"],
+        },
+      ],
     });
     return productTypes;
   } catch (error) {
@@ -13,10 +20,19 @@ const getProductTypes = async (parent, { offset = 0, pageSize = 10 }, context, i
   }
 };
 
-const getProductTypesById  = async (parent, { id }, context, info) => {
+const getProductTypesById = async (parent, { id }, context, info) => {
   try {
     const ProductTypesId = parseInt(id, 10); // ✅ แปลง `id` เป็น Integer
-    const productTypes = await ProductTypes.findOne({ where: { id: ProductTypesId } });
+    const productTypes = await ProductTypes.findOne({
+      where: { id: ProductTypesId },
+      include: [
+        {
+          model: Product,
+          as: "product", // ✅ เพิ่ม as ให้ตรงกับ belongsTo
+          attributes: ["id", "products_name", "price"],
+        },
+      ],
+    });
     if (!productTypes) {
       console.error(`❌ User with ID ${ProductTypesId} not found`);
       return null; // ✅ คืน `null` ถ้าไม่พบ User

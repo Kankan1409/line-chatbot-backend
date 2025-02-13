@@ -32,6 +32,13 @@ class ProductCategories extends Model {
       }
     );
   }
+  static associate(models) {
+    if (models.Product) {
+      this.hasMany(models.Product, { foreignKey: "category_id", as: "products" });  // ✅ ใช้ `as: "products"`
+    } else {
+        console.error("❌ models.Product ไม่ถูกโหลด");
+    }
+  }
 }
 
 module.exports = ProductCategories;

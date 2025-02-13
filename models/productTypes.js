@@ -40,6 +40,13 @@ class ProductTypes extends Model {
       }
     );
   }
+  static associate(models) {
+    if (models.Product) {  // ✅ ตรวจสอบว่ามี models.Product หรือไม่
+      this.belongsTo(models.Product, { foreignKey: "product_id", as: "product" });
+    } else {
+      console.error("❌ models.Product ไม่ถูกโหลด");
+    }
+  }
 }
 
 module.exports = ProductTypes;
