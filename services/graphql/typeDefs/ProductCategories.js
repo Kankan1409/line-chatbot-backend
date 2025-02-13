@@ -7,7 +7,7 @@ const productCategoriesTypeDefs = gql`
     }
 
     extend type Query {
-        getProductCategories: [ProductCategories]
+        getProductCategories(offset: Int, pageSize: Int): [ProductCategories]
         getProductCategoriesById(id: ID!): ProductCategories
     }
 
