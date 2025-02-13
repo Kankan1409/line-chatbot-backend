@@ -1,8 +1,11 @@
 const ProductTypes = require("../../../../models/productTypes");
+const Product = require("../../../../models/product");
 
 const updateProductTypes = async (parent, { id, product_id, typeName, remaining }, context, info) => {
     try {
-        const productType = await ProductTypes.findByPk(id);
+        const productType = await ProductTypes.findByPk(id, {
+            include: [{ model: Product, as: "product" }]
+        }); 
         if (!productType) {
             throw new Error("ProductType not found");
         }
@@ -15,7 +18,11 @@ const updateProductTypes = async (parent, { id, product_id, typeName, remaining 
             updated_at: new Date(), // อัพเดทเวลา
         });
 
-        return productType;
+        const updatedProductType = await ProductTypes.findByPk(id, {
+            include: [{ model: Product, as: "product" }]
+        });
+
+        return updatedProductType;
     } catch (error) {
         console.error("❌ Error while updating product type:", error);
         throw new Error("Failed to update product type: " + error.message);
