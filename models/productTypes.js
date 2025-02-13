@@ -1,38 +1,45 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/sequelize");
-
-const ProductTypes = sequelize.define("ProductTypes", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false
-  },
-  product_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  typeName: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  remaining: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW
+const { Model, DataTypes } = require("sequelize");
+class ProductTypes extends Model {
+  static init(sequelize) {  // ✅ ต้องรับ `sequelize` ที่ถูกต้อง
+    return super.init(
+      {
+        id: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true,
+          allowNull: false
+        },
+        product_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
+        typeName: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        remaining: {
+          type: DataTypes.INTEGER,
+          allowNull: true
+        },
+        created_at: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW
+        },
+        updated_at: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW
+        }
+      },
+      {
+        sequelize,
+        modelName: "ProductTypes",
+        tableName: "product_types",
+        timestamps: false,
+      }
+    );
   }
-}, {
-  tableName: "product_types",
-  timestamps: false
-});
+}
 
-module.exports = ProductTypes; 
+module.exports = ProductTypes;

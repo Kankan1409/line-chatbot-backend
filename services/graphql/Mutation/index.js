@@ -1,23 +1,26 @@
-const fs = require("fs");
-const path = require("path");
-
 const mutationResolvers = {};
 
-// ✅ โหลดทุกไฟล์และโฟลเดอร์ย่อยใน `Mutation/`
-fs.readdirSync(__dirname).forEach(folder => {
-  const folderPath = path.join(__dirname, folder);
+// ✅ เพิ่ม resolver ทีละไฟล์แบบกำหนดเอง
+const createMember = require("./Member/createMember");
+const updateMember = require("./Member/updateMember");
+const deleteMember = require("./Member/deleteMember");
 
-  // ✅ ถ้าเป็นโฟลเดอร์ (เช่น `User/`)
-  if (fs.lstatSync(folderPath).isDirectory()) {
-    fs.readdirSync(folderPath).forEach(file => {
-      const resolver = require(path.join(folderPath, file));
-      Object.assign(mutationResolvers, resolver);
-    });
-  } else if (folder !== "index.js") {
-    // ✅ ถ้าเป็นไฟล์ที่อยู่ตรง `Mutation/`
-    const resolver = require(folderPath);
-    Object.assign(mutationResolvers, resolver);
-  }
-});
+const createProduct = require("./Product/createProduct");
+const updateProduct = require("./Product/updateProduct");
+const deleteProduct = require("./Product/deleteProduct");
+const productTypes = require("./ProductTypes");
+const productDetails = require("./ProductDetails");
 
+// ✅ รวม resolver ทั้งหมดเข้าด้วยกัน
+Object.assign(mutationResolvers, 
+  createMember, 
+  updateMember, 
+  deleteMember,
+  createProduct, 
+  updateProduct, 
+  deleteProduct,
+  ...Object.values(productTypes),
+  ...Object.values(productDetails)
+);
+console.log("✅ mutation Resolvers Loaded:", mutationResolvers);
 module.exports = mutationResolvers;

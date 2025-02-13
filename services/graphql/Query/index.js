@@ -1,23 +1,25 @@
-const fs = require("fs");
-const path = require("path");
+// ✅ เพิ่ม resolver ทีละไฟล์แบบกำหนดเอง
+const {getUsers, getUserById} = require("./getUser");
+const {getMember, getMemberById} = require("./getMember");
+const {getProductTypes, getProductTypesById} = require("./getProductTypes");
+const {getProduct, getProductById} = require("./getProduct");
+const {getProductCategories, getProductCategoriesById} = require("./getProductCategories");
+const {getProdDet, getProdDetById} = require("./getProdDet");
 
-const queryResolvers = {};
-
-// อ่านโฟลเดอร์ทั้งหมดภายใน `Query/`
-fs.readdirSync(__dirname).forEach(folder => {
-    const folderPath = path.join(__dirname, folder);
-
-     // ✅ ถ้าเป็นโฟลเดอร์ (เช่น `User/`)
-    if (fs.lstatSync(folderPath).isDirectory()) {
-        fs.readdirSync(folderPath).forEach(file => {
-          const resolver = require(path.join(folderPath, file));
-          Object.assign(queryResolvers, resolver);
-        });
-    } else if (folder !== "index.js") {
-        // โหลดไฟล์ที่อยู่ตรง `Query/` โดยตรง (ถ้ามี)
-        const resolver = require(folderPath);
-        Object.assign(queryResolvers, resolver);
-    }
-});
+// ✅ รวม resolver ทั้งหมดเข้าด้วยกัน
+const queryResolvers = {
+    getUsers,
+    getUserById,
+    getMember,
+    getMemberById,
+    getProductTypes,
+    getProductTypesById,
+    getProduct,
+    getProductById,
+    getProductCategories,
+    getProductCategoriesById,
+    getProdDet,
+    getProdDetById,
+};
 
 module.exports = queryResolvers;
