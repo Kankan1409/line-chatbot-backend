@@ -1,46 +1,61 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/sequelize");
+const { Model, DataTypes } = require("sequelize");
 
-const Product = sequelize.define("Product", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false
-  },
-  category_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  products_name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  price: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
-  stock: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW
+class Product extends Model {
+  static init(sequelize) {
+    return super.init({
+        id: {
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true,
+          allowNull: false
+        },
+        category_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
+        products_name: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        price: {
+          type: DataTypes.INTEGER,
+          allowNull: true
+        },
+        stock: {
+          type: DataTypes.INTEGER,
+          allowNull: true
+        },
+        description: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        created_at: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW
+        },
+        updated_at: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW
+        }
+      },
+      {
+        sequelize,
+        modelName: "Product",
+        tableName: "products",
+        timestamps: false,
+      }
+    );
   }
-}, {
-  tableName: "products",
-  timestamps: false
-});
 
-module.exports = Product; 
+  static associate(models) {
+    if (models.Prod_Det) {
+        this.hasMany(models.Prod_Det, { foreignKey: "product_id", as: "productDetails" });
+    } else {
+        console.error("❌ models.Prod_Det ไม่ถูกโหลด");
+    }
+}
+}
+
+module.exports = Product; // ✅ ต้องแน่ใจว่า export model ออกไป

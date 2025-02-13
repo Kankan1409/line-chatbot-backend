@@ -1,39 +1,45 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/sequelize"); // ✅ ใช้ Sequelize ที่ถูกต้อง
 
-class Member extends Model {}
-
-Member.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING(250),
-      allowNull: false,
-      unique: true,
-    },
-    lastname: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    phone: {
-      type: DataTypes.STRING(10),
-      allowNull: true,
-    },
-    name_introduc: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-  },
-  {
-    sequelize, 
-    modelName: "Member",
-    tableName: "members",
-    timestamps: true,
-    underscored: true,
+class Member extends Model {
+  static init(sequelize) {  // ✅ ต้องรับ `sequelize` ที่ถูกต้อง
+    return super.init(
+      {
+        id: { 
+          type: DataTypes.INTEGER, 
+          primaryKey: true, 
+          autoIncrement: true 
+        },
+        name: { 
+          type: DataTypes.STRING(250), 
+          allowNull: false, 
+          unique: true 
+        },
+        lastname: { 
+          type: DataTypes.STRING(255), 
+          allowNull: true 
+        },
+        sex: { 
+          type: DataTypes.STRING(255), 
+          allowNull: true 
+        },
+        phone: { 
+          type: DataTypes.STRING(10), 
+          allowNull: true 
+        },
+        name_introduc: { 
+          type: DataTypes.STRING(255), 
+          allowNull: true 
+        },
+      },
+      {
+        sequelize, // ✅ ต้องกำหนด sequelize ที่รับเข้ามา
+        modelName: "Member",
+        tableName: "members",
+        timestamps: true,
+        underscored: true,
+      }
+    );
   }
-);
-module.exports = Member; 
+}
+
+module.exports = Member;

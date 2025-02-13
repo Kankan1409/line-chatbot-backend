@@ -3,6 +3,7 @@ const memberTypeDefs = require("./member");
 const productTypesTypeDefs = require("./productTypes");
 const productTypeDefs = require("./product");
 const productCategoriesTypeDefs = require("./ProductCategories");
+const prodDetTypeDefs = require("./ProdDet");
 
 const baseTypeDefs = `
     type Query
@@ -15,5 +16,6 @@ module.exports = [
     memberTypeDefs,
     productTypesTypeDefs,
     productTypeDefs,
-    productCategoriesTypeDefs
+    productCategoriesTypeDefs,
+    prodDetTypeDefs
 ];

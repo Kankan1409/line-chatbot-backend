@@ -1,9 +1,11 @@
-const { createProductTypes } = require("./createProductTypes");
-const { updateProductTypes } = require("./updateProductTypes");
-const { deleteProductTypes } = require("./deleteProductTypes");
+const createProductTypes = require("./createProductTypes");
+const updateProductTypes = require("./updateProductTypes");
+const deleteProductTypes = require("./deleteProductTypes");
 
-module.exports = {
+const productTypes = {
     createProductTypes,
     updateProductTypes,
     deleteProductTypes
 };
+
+module.exports = productTypes;
