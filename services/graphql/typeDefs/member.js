@@ -11,7 +11,7 @@ const memberTypeDefs = gql`
     }
 
     extend type Query {
-        getMember: [Member]
+        getMember(offset: Int, pageSize: Int): [Member]
         getMemberById(id: ID!): Member
     }
 
